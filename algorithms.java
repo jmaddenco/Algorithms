@@ -1,7 +1,7 @@
 class Algorithms {
 
 	public static void main(String[] args) {
-		int[] cards = {7, 3, 11, 9, 2, 9, 2};
+		int[] cards = {7, 3, 11, 9, 2, 9, 2, 1};
 		int[] sorted = sort(cards);
 		String str = "";
 		for (int j = 0; j < sorted.length; j ++) {
@@ -10,7 +10,7 @@ class Algorithms {
 		}
 
 		System.out.println(str);
-		System.out.println(present(sorted, 19));
+		System.out.println(present(sorted, 11));
 
 	}
 
@@ -45,12 +45,26 @@ class Algorithms {
 		}
 
 		public static boolean present(int[] a, int b) {
-			boolean present = false;
-			for (int j = 0; j <= a.length; j ++) {
-				if (a[j] == b) {
-					return present = true;
+			int[] newA = a;
+			int mid = newA.length/2;
+			int upper = 0;
+			int lower = newA.length/2;
+
+			for (int j = 0; j < newA.length; j ++) {
+				if (b > newA[lower]) {
+					System.out.println("Higher");
+					upper = newA.length/2 + 1;
+					lower = mid;
+				} else if (b < newA[lower]) {
+					System.out.println("Lower");
+					upper = mid;
+					lower = newA.length/2 - 1;
+				} else if (newA[j] == b) {
+					return true;
+				} else {
+					return false;
 				}
 			}
-			return present;
+			return false;
 		}
 	}
